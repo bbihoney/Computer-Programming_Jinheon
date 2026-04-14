@@ -43,9 +43,14 @@ public class card : MonoBehaviour
         else
         {
             cardGame.OnClickCard(this);
-            isFront = !isFront;
+
         }
 
+    }
+
+    public void Flip(bool isFront)
+    {
+        this.isFront = isFront;
     }
 
 
@@ -63,8 +68,11 @@ public class card : MonoBehaviour
         GetComponent<Image>().color = newColor;
     }
 
-
-
+    public void SetImage(Sprite sprite)
+    {
+        GetComponent<Image>().sprite = sprite;
     }
+
+}
 
 

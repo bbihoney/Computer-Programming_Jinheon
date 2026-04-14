@@ -5,8 +5,10 @@ using System.Collections.Generic;
 public class Cardgame : MonoBehaviour
 {
     public List<card> cards = new List<card>();
+    public List<Sprite> sprites = new List<Sprite>();
     public card firstCard = null;
     public card secondCard = null;
+    public bool isChecking = false;
 
 
 
@@ -26,6 +28,8 @@ public class Cardgame : MonoBehaviour
         for (int i = 0; i < cards.Count; ++i)
         {
             cards[i].SetCardNumber(pairNumbers[i]);
+
+            cards[i].SetImage(sprites[pairNumbers[i]]);
         }
 
 
@@ -37,6 +41,8 @@ public class Cardgame : MonoBehaviour
     
     void CheckCard()
     {
+        isChecking = true;
+
         if(firstCard.number == secondCard.number )
         {
             firstCard.ChangeColor(Color.red);
@@ -47,6 +53,8 @@ public class Cardgame : MonoBehaviour
 
             firstCard = null;
             secondCard = null;
+
+            isChecking = false;
         }
         else
         {
@@ -56,13 +64,21 @@ public class Cardgame : MonoBehaviour
 
     public void OnClickCard(card card)
     {
+        if(isChecking)
+        {
+            return;
+        }
+
+
         if(firstCard == null)
         {
             firstCard = card;
+            firstCard.Flip(true);
         }
         else
         {
             secondCard = card;
+            secondCard.Flip(true);
         }
 
         if(firstCard !=  null && secondCard != null)
@@ -70,13 +86,21 @@ public class Cardgame : MonoBehaviour
             CheckCard();
         }
     }
+
     void HideCard()
     {
         firstCard.isFront = false;
         secondCard.isFront = false;
 
-        firstCard = null;
+        firstCard.Flip(false);
+        secondCard.Flip(false);
+
+        isChecking = false;
+
+        firstCard = null; 
         secondCard = null;
+
+      
     }
 
 
