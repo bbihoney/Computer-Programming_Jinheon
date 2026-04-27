@@ -12,6 +12,8 @@ public class card : MonoBehaviour
     public int number;
     public Cardgame cardGame;
     public bool ismatched = false;
+    public Sprite backimage;
+    public Sprite frontimage;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     // Update is called once per frame
@@ -25,10 +27,12 @@ public class card : MonoBehaviour
         if (isFront)
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, originRortation, rotateY * Time.deltaTime);
+            GetComponent<Image>().sprite = frontimage;
         }
         else
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, flipRortation, rotateY * Time.deltaTime);
+            GetComponent<Image>().sprite = backimage;
         }
       
 
@@ -71,6 +75,7 @@ public class card : MonoBehaviour
     public void SetImage(Sprite sprite)
     {
         GetComponent<Image>().sprite = sprite;
+        frontimage = sprite;
     }
 
 }

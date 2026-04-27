@@ -9,6 +9,7 @@ public class Cardgame : MonoBehaviour
     public card firstCard = null;
     public card secondCard = null;
     public bool isChecking = false;
+    public int paircard;
 
 
 
@@ -22,18 +23,21 @@ public class Cardgame : MonoBehaviour
 
     void StartGame()
     {
-        List<int> pairNumbers = GeneratePairNumber(cards.Count);
+        int casdnumbur = paircard * 2;
+        List<int> pairNumbers = GeneratePairNumber(casdnumbur);
 
 
-        for (int i = 0; i < cards.Count; ++i)
+        for (int i = 0; i < casdnumbur; ++i)
         {
+            cards[i].gameObject.SetActive(true);
+
             cards[i].SetCardNumber(pairNumbers[i]);
 
             cards[i].SetImage(sprites[pairNumbers[i]]);
         }
 
 
-        for (int i = 0; i < cards.Count; ++i)
+        for (int i = 0; i < casdnumbur; ++i)
         {
             cards[i].isFront = false;
         }
